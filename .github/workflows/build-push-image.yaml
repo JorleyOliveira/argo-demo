@@ -30,9 +30,11 @@ jobs:
           context: .
           push: true
           tags: jorleyoliveira/argocd-demo:latest
+
       - name: Inspect
         run: |
           docker image inspect jorleyoliveira/argocd-demo:latest
+
       - name: Get git sha short
         id: vars
         run: echo "::set-output name=sha_short::$(git rev-parse --short HEAD)"
