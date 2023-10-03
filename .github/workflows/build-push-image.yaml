@@ -12,6 +12,10 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v3
 
+      - name: Get git sha short
+        id: vars
+        run: echo "::set-output name=sha_short::$(git rev-parse --short HEAD)"
+
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v3
 
@@ -24,20 +28,14 @@ jobs:
           username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_PASSWORD }}
 
+
       - name: Build and push
         uses: docker/build-push-action@v5
         with:
           context: .
           push: true
-          tags: jorleyoliveira/argocd-demo:latest
+          tags: jorleyoliveira/argocd-demo:sha-${{ steps.vars.outputs.sha_short }}
 
-      - name: Inspect
-        run: |
-          docker image inspect jorleyoliveira/argocd-demo:latest
-
-      - name: Get git sha short
-        id: vars
-        run: echo "::set-output name=sha_short::$(git rev-parse --short HEAD)"
 
       - name: Generate deploy manifest from Jinja template
         uses: cuchi/jinja2-action@v1.1.0
