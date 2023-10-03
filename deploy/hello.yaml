@@ -15,13 +15,15 @@ spec:
       terminationGracePeriodSeconds: 5
       containers:
       - name: server
-        image: saiyam911/argocd-demo:sha-170ac5b
+        image: jorleyoliveira/argocd-demo:ba28b50
         imagePullPolicy: Always
         ports:
         - containerPort: 8080
         env:
         - name: PORT
           value: "8080"
+      imagePullSecrets:
+        - name: regcred
 ---
 apiVersion: v1
 kind: Service
