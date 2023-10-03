@@ -15,7 +15,7 @@ spec:
       terminationGracePeriodSeconds: 5
       containers:
       - name: server
-        image: jorleyoliveira/argocd-demo:ba28b50
+        image: jorleyoliveira/argocd-demo:sha-b3d4f07
         imagePullPolicy: Always
         ports:
         - containerPort: 8080
@@ -37,15 +37,4 @@ spec:
     protocol: TCP
     targetPort: 8080
   type: NodePort
----
-apiVersion: v1
-kind: Pod
-metadata:
-  name: helloservice
-spec:
-  containers:
-  - name: server
-    image: jorleyoliveira/argocd-demo:ba28b50
-  imagePullSecrets:
-  - name: regcred
 
