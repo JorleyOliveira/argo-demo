@@ -30,9 +30,6 @@ jobs:
           context: .
           push: true
           tags: jorleyoliveira/argocd-demo:latest
-          tag_with_ref: true
-          add_git_labels: true
-          tag_with_sha: true
 
       - name: Get git sha short
         id: vars
